@@ -5,6 +5,6 @@ Repositório para a disciplina de Programação Web, desenvolvido durante a quin
 - [Jira (Tarefas)](https://criminal-cases.atlassian.net)
 # Padrões de Desenvolvimento
 - [Conventional Commits](./docs/patterns/conventional-commits.md)
-- [Pull Requests](./docs/patterns/pull-requests.md)
+- [Pull Requests](./docs/patterns/pull-requests.md)rfeaf
 # Releases
 - [Releases](./docs/releases.md)
