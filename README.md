@@ -8,7 +8,10 @@ Repositório para a disciplina de Programação Web, desenvolvido durante a quin
 - [Pull Requests](./docs/patterns/pull-requests.md)
 # Releases
 - [Releases](./docs/releases.md)
-
+# Arquitetura
+- [Architecture](./docs/architecture.md)
+# Requisitos
+- [Requirements](./docs/requirements.md)
 ### Feito por:  
 
 **Mateus Finder Martins**  
