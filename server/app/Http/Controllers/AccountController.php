@@ -18,7 +18,7 @@ class AccountController extends Controller
             $email = $post['email'] ?? null;
             $federalId = $post['federalId'] ?? null;
             $createAccountCase = new CreateAccountCase();
-            $createAccountCase->execute($accountName, $password, $email, $federalId);
+            return $createAccountCase->execute($accountName, $password, $email, $federalId);
             //to do, trabalhar no retorno
         } catch (Exception $e) {
             return $e->getMessage();

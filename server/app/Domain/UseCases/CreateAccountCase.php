@@ -5,6 +5,7 @@ namespace App\Domain\UseCases;
 use App\Domain\Services\EmailValidatorService;
 use App\Domain\ValueObjects\FederalId;
 use App\Domain\ValueObjects\Password;
+use App\Models\Account;
 use Exception;
 
 class CreateAccountCase
@@ -14,6 +15,7 @@ class CreateAccountCase
         $this->validateEmail($email);
         $cleanPassword = $this->buildPassword($password);
         $cleanFederalId = $this->verifyFederalId($federalId);
+        return Account::find($cleanFederalId) ?? "jorge";
         // usar o eloquent pra buscar alguma conta com esse nome ou email, se tiver taca exception
         //(precisa do banco configurado para aparecerem os métodos.)
     }

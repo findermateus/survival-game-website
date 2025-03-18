@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ValueObjects\Unit;
+namespace Tests\Unit\ValueObjects;
 
 use App\Domain\ValueObjects\FederalId;
 use Exception;

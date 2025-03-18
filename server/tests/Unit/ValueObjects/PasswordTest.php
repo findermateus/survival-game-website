@@ -1,8 +1,7 @@
 <?php
 
-namespace Tests\ValueObjects\Unit;
+namespace Tests\Unit\ValueObjects;
 
-use App\Domain\ValueObjects\FederalId;
 use App\Domain\ValueObjects\Password;
 use Exception;
 use PHPUnit\Framework\TestCase;
