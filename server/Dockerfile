@@ -1,4 +1,4 @@
-FROM php:8.2-apache as web
+FROM php:8.2-apache AS survival_server
 
 RUN apt-get update && apt-get install -y \
     libzip-dev \

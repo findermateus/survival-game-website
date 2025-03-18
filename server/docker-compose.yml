@@ -1,10 +1,10 @@
 version: '3.8'
 
 services:
-  web:
+  survival_server:
     image: app_server:latest
     build:
-      target: web
+      target: survival_server
       context: .
     env_file:
       - .env
