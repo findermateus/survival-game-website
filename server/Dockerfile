@@ -23,3 +23,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN composer install
 
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+RUN pecl install xdebug && docker-php-ext-enable xdebug
+
+COPY xdebug.ini /usr/local/etc/php/conf.d/
