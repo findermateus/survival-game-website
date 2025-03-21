@@ -2,22 +2,25 @@
 
 namespace App\Domain\ValueObjects;
 
-use Exception;
+use App\Exceptions\InvalidFederalIdException;
 
 class FederalId
 {
     private string $federalId;
 
+    /**
+     * @throws InvalidFederalIdException
+     */
     public function __construct(string $federalId)
     {
         $cleanedFederalId = $this->cleanFederalId($federalId);
         if (!$this->validateFederalId($cleanedFederalId)) {
-            throw new Exception("CPF inválido");
+            throw new InvalidFederalIdException("CPF inválido");
         }
         $this->federalId = $cleanedFederalId;
     }
 
-    private function validateFederalId($cleanedFederalId)
+    private function validateFederalId($cleanedFederalId): bool
     {
         if (strlen($cleanedFederalId) != 11) {
             return false;
@@ -29,15 +32,15 @@ class FederalId
 
         $baseFederalId = substr($cleanedFederalId, 0, 9);
         list($d1, $d2) = $this->calculateDigit($baseFederalId);
-        return ($d1 == $cleanedFederalId[9] && $d2 == $cleanedFederalId[10]);
+        return $d1 == $cleanedFederalId[9] && $d2 == $cleanedFederalId[10];
     }
 
-    private function cleanFederalId($federalId)
+    private function cleanFederalId($federalId): array|string|null
     {
         return preg_replace('/[.-]/', '', $federalId);
     }
 
-    private function calculateDigit($baseFederalId)
+    private function calculateDigit($baseFederalId): array
     {
         $total = 0;
 

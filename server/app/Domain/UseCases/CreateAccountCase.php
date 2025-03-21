@@ -2,29 +2,38 @@
 
 namespace App\Domain\UseCases;
 
+use App\Domain\Repositories\AccountRepositoryInterface;
 use App\Domain\Services\EmailValidatorService;
 use App\Domain\ValueObjects\FederalId;
 use App\Domain\ValueObjects\Password;
-use App\Models\Account;
-use Exception;
+use App\Exceptions\AccountAlreadyExistsException;
+use App\Exceptions\InvalidEmailException;
 
 class CreateAccountCase
 {
-    public function execute($name, $password, $email, $federalId)
+    public function __construct(private readonly AccountRepositoryInterface $accountRepository)
     {
-        $this->validateEmail($email);
-        $cleanPassword = $this->buildPassword($password);
-        $cleanFederalId = $this->verifyFederalId($federalId);
-        return Account::find($cleanFederalId) ?? "jorge";
-        // usar o eloquent pra buscar alguma conta com esse nome ou email, se tiver taca exception
-        //(precisa do banco configurado para aparecerem os métodos.)
     }
 
-    private function validateEmail($email)
+    public function execute($name, $password, $email, $federalId): void
+    {
+        $this->validateEmail($email);
+        $cleanFederalId = $this->verifyFederalId($federalId);
+        $this->validateAccountDoesntExists($email, $cleanFederalId);
+        $encryptedPassword = $this->buildPassword($password);
+        $this->accountRepository->createAccount([
+            'name' => $name,
+            'password' => $encryptedPassword,
+            'email' => $email,
+            'federalId' => $cleanFederalId
+        ]);
+    }
+
+    private function validateEmail($email): void
     {
         $emailValidator = new EmailValidatorService();
         if (!$emailValidator->validate($email)) {
-            throw new Exception("Email inválido");
+            throw new InvalidEmailException("Email inválido");
         }
     }
 
@@ -34,9 +43,17 @@ class CreateAccountCase
         return $password->__toString();
     }
 
-    private function verifyFederalId($federalId)
+    private function verifyFederalId($federalId): array|string|null
     {
         $federalId = new FederalId($federalId);
         return $federalId->__toString();
+    }
+
+    private function validateAccountDoesntExists($email, $cleanFederalId): void
+    {
+        $account = $this->accountRepository->findAccountByEmailAndFederalId($email, $cleanFederalId);
+        if (!empty($account)) {
+            throw new AccountAlreadyExistsException("Uma conta já existe com as credênciais informadas!");
+        }
     }
 }
