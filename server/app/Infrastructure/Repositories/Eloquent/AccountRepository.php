@@ -8,14 +8,14 @@ use App\Models\Account;
 
 class AccountRepository implements AccountRepositoryInterface
 {
-    public function findAccount($email = null, $federalId = null): ?Account
+    public function find($email = null, $federalId = null): ?Account
     {
         return Account::where('email', '=',  $email)
             ->orWhere('federal_id', '=', $federalId)
             ->first();
     }
 
-    public function createAccount($payload): void
+    public function create($payload): void
     {
         $account = new Account();
         $account->account_name = $payload['name'];

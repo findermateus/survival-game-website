@@ -30,7 +30,7 @@ class LoginCase
         if (empty($email)){
             throw new InvalidEmailException('Email não enviado.');
         }
-        $account = $this->accountRepository->findAccount($email);
+        $account = $this->accountRepository->find($email);
         if (!$account instanceof Account){
             throw new AccountNotFoundException('Conta não encontrada com as credenciais selecionadas.');
         }

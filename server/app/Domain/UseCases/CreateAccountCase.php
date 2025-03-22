@@ -21,7 +21,7 @@ class CreateAccountCase
         $cleanFederalId = $this->verifyFederalId($federalId);
         $encryptedPassword = $this->buildPassword($password);
         $this->validateAccountDoesntExists($email, $cleanFederalId);
-        $this->accountRepository->createAccount([
+        $this->accountRepository->create([
             'name' => $name,
             'password' => $encryptedPassword,
             'email' => $email,
@@ -51,7 +51,7 @@ class CreateAccountCase
 
     private function validateAccountDoesntExists($email, $cleanFederalId): void
     {
-        $account = $this->accountRepository->findAccount($email, $cleanFederalId);
+        $account = $this->accountRepository->find($email, $cleanFederalId);
         if (!empty($account)) {
             throw new AccountAlreadyExistsException("Uma conta já existe com as credênciais informadas!");
         }

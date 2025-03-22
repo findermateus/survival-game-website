@@ -4,7 +4,7 @@ namespace App\Domain\Repositories;
 
 interface AccountRepositoryInterface
 {
-    public function findAccount($email = null, $federalId = null);
+    public function find($email = null, $federalId = null);
 
-    public function createAccount($payload): void;
+    public function create($payload): void;
 }
