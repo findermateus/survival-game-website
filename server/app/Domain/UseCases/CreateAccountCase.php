@@ -19,8 +19,8 @@ class CreateAccountCase
     {
         $this->validateEmail($email);
         $cleanFederalId = $this->verifyFederalId($federalId);
-        $this->validateAccountDoesntExists($email, $cleanFederalId);
         $encryptedPassword = $this->buildPassword($password);
+        $this->validateAccountDoesntExists($email, $cleanFederalId);
         $this->accountRepository->createAccount([
             'name' => $name,
             'password' => $encryptedPassword,

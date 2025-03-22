@@ -15,7 +15,7 @@ class ApplicationException extends Exception
     {
         $this->exceptionType = $exceptionType;
         $this->httpStatus = $httpStatus;
-        parent::__construct($message, null, $previous);
+        parent::__construct($message, 0, $previous);
     }
 
     public function render(): JsonResponse
