@@ -10,4 +10,5 @@ enum ExceptionType
     case InvalidPassword;
     case AccountAlreadyExists;
     case AccountNotCreated;
+    case AccountNotFound;
 }

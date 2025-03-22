@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Exceptions;
+namespace App\Exceptions\Account;
 use App\Core\ExceptionType;
 use Exception;
+
 class AccountNotCreatedException extends ApplicationException
 {
     public function __construct($message = "", ?Exception $exception = null)

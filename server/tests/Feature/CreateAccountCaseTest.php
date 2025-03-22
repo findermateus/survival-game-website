@@ -5,9 +5,9 @@ namespace Tests\Feature;
 use App\Domain\Repositories\AccountRepositoryInterface;
 use App\Domain\UseCases\CreateAccountCase;
 use App\Domain\ValueObjects\FederalId;
-use App\Exceptions\AccountAlreadyExistsException;
-use App\Exceptions\InvalidEmailException;
-use App\Exceptions\InvalidPasswordException;
+use App\Exceptions\Account\AccountAlreadyExistsException;
+use App\Exceptions\Account\InvalidEmailException;
+use App\Exceptions\Account\InvalidPasswordException;
 use App\Models\Account;
 use PHPUnit\Framework\MockObject\MockObject;
 use Tests\TestCase;
@@ -31,7 +31,7 @@ class CreateAccountCaseTest extends TestCase
         ];
         $cleanFederalId = new FederalId($request['federalId']);
         $this->accountRepositoryMock
-            ->method('findAccountByEmailAndFederalId')
+            ->method('findAccount')
             ->with($request['email'], $cleanFederalId->__toString())
             ->willReturn(null);
         $createAccountCase = new CreateAccountCase($this->accountRepositoryMock);
@@ -46,7 +46,7 @@ class CreateAccountCaseTest extends TestCase
             'federalId' => '287.962.090-20'
         ];
         $this->accountRepositoryMock
-            ->method('findAccountByEmailAndFederalId')
+            ->method('findAccount')
             ->willReturn(new Account());
         $createAccountCase = new CreateAccountCase($this->accountRepositoryMock);
         $this->expectException(AccountAlreadyExistsException::class);

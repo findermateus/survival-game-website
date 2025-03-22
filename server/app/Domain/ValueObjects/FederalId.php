@@ -2,7 +2,7 @@
 
 namespace App\Domain\ValueObjects;
 
-use App\Exceptions\InvalidFederalIdException;
+use App\Exceptions\Account\InvalidFederalIdException;
 
 class FederalId
 {

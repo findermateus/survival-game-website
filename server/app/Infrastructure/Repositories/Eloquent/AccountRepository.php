@@ -3,15 +3,15 @@
 namespace App\Infrastructure\Repositories\Eloquent;
 
 use App\Domain\Repositories\AccountRepositoryInterface;
-use App\Exceptions\AccountNotCreatedException;
+use App\Exceptions\Account\AccountNotCreatedException;
 use App\Models\Account;
 
 class AccountRepository implements AccountRepositoryInterface
 {
-    public function findAccountByEmailAndFederalId($email, $federalId)
+    public function findAccount($email = null, $federalId = null): ?Account
     {
-        return Account::where('email', '=', $email)
-            ->where('federal_id', '=', $federalId)
+        return Account::where('email', '=',  $email)
+            ->orWhere('federal_id', '=', $federalId)
             ->first();
     }
 

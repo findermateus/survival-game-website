@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  *
@@ -22,8 +24,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Account wherePassword($value)
  * @mixin \Eloquent
  */
-class Account extends Model
+class Account extends User
 {
+    use HasApiTokens, Notifiable;
+
     public $timestamps = false;
 
     protected $table = 'accounts';

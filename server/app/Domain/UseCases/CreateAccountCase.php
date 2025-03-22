@@ -6,8 +6,8 @@ use App\Domain\Repositories\AccountRepositoryInterface;
 use App\Domain\Services\EmailValidatorService;
 use App\Domain\ValueObjects\FederalId;
 use App\Domain\ValueObjects\Password;
-use App\Exceptions\AccountAlreadyExistsException;
-use App\Exceptions\InvalidEmailException;
+use App\Exceptions\Account\AccountAlreadyExistsException;
+use App\Exceptions\Account\InvalidEmailException;
 
 class CreateAccountCase
 {
@@ -45,13 +45,13 @@ class CreateAccountCase
 
     private function verifyFederalId($federalId): array|string|null
     {
-        $federalId = new FederalId($federalId);
+        $federalId = new FederalId($federalId ?? '');
         return $federalId->__toString();
     }
 
     private function validateAccountDoesntExists($email, $cleanFederalId): void
     {
-        $account = $this->accountRepository->findAccountByEmailAndFederalId($email, $cleanFederalId);
+        $account = $this->accountRepository->findAccount($email, $cleanFederalId);
         if (!empty($account)) {
             throw new AccountAlreadyExistsException("Uma conta já existe com as credênciais informadas!");
         }
