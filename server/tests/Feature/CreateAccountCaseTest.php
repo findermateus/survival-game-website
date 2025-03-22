@@ -31,7 +31,7 @@ class CreateAccountCaseTest extends TestCase
         ];
         $cleanFederalId = new FederalId($request['federalId']);
         $this->accountRepositoryMock
-            ->method('findAccount')
+            ->method('find')
             ->with($request['email'], $cleanFederalId->__toString())
             ->willReturn(null);
         $createAccountCase = new CreateAccountCase($this->accountRepositoryMock);
@@ -46,7 +46,7 @@ class CreateAccountCaseTest extends TestCase
             'federalId' => '287.962.090-20'
         ];
         $this->accountRepositoryMock
-            ->method('findAccount')
+            ->method('find')
             ->willReturn(new Account());
         $createAccountCase = new CreateAccountCase($this->accountRepositoryMock);
         $this->expectException(AccountAlreadyExistsException::class);
