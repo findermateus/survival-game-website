@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   survival_server:
+    container_name: survival_server
     image: app_server:latest
     build:
       target: survival_server

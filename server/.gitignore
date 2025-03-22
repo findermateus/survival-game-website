@@ -1,4 +1,4 @@
-/.phpunit.cache
+.phpunit.cache
 /node_modules
 /public/build
 /public/hot
@@ -15,9 +15,9 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-/auth.json
-/.fleet
-/.idea
-/.nova
-/.vscode
-/.zed
+auth.json
+.fleet
+.idea
+.nova
+.vscode
+.zed

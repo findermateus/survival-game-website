@@ -8,4 +8,5 @@ Route::get('/', function (Request $request) {
     return 'Hello World';
 });
 
-Route::post('/account', [AccountController::class, 'createAccount']);
+Route::post('/account', [AccountController::class, 'createAccount']); //->middleware('auth:sanctum');
+Route::post('/login', [AccountController::class, 'login']);
