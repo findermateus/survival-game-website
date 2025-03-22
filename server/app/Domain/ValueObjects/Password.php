@@ -2,11 +2,12 @@
 
 namespace App\Domain\ValueObjects;
 
-use Exception;
+use App\Exceptions\Account\InvalidPasswordException;
 
 class Password
 {
-    private $password;
+    private string $password;
+    private string $rawPassword;
 
     public function __construct(string $password)
     {
@@ -17,8 +18,9 @@ class Password
     private function validatePassword($password)
     {
         if (strlen($password) < 8) {
-            throw new Exception("A senha deve ter no mínimo 8 caracteres");
+            throw new InvalidPasswordException("A senha deve ter no mínimo 8 caracteres");
         }
+        $this->rawPassword = $password;
     }
 
     private function encrypt($password)
@@ -28,7 +30,7 @@ class Password
 
     public function verify($password)
     {
-        return password_verify($password, $this->password);
+        return password_verify($this->rawPassword, $password);
     }
 
     public function __toString()
