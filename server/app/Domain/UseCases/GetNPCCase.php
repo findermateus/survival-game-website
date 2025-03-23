@@ -14,12 +14,12 @@ class GetNPCCase
     {
     }
 
-    public function execute($accountId): ?array
+    public function execute($accountId): ?NonPlayableCharacter
     {
         $npc = $this->npcRepository->find($accountId);
         if (!$npc instanceof NonPlayableCharacter){
             throw new NPCNotFoundException("NPC não encontrado para usuário.");
         }
-        return $npc->toArray();
+        return $npc;
     }
 }
