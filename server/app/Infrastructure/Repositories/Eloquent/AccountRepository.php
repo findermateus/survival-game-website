@@ -15,7 +15,7 @@ class AccountRepository implements AccountRepositoryInterface
             ->first();
     }
 
-    public function create($payload): void
+    public function create($payload): ?Account
     {
         $account = new Account();
         $account->account_name = $payload['name'];
@@ -25,5 +25,6 @@ class AccountRepository implements AccountRepositoryInterface
         if(!$account->save()) {
             throw new AccountNotCreatedException("Não foi possível criar a conta.");
         }
+        return $account;
     }
 }

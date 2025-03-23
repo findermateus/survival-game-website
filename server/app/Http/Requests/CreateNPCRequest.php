@@ -22,7 +22,7 @@ class CreateNPCRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'gender' => 'required|integer|exists:gender,id',
+            'gender' => 'required|integer|exists:genders,id',
             'name' => 'required|string|max:255',
             'skinColor' => 'required|integer|exists:skin_colors,id',
             'hairColor' => 'required|string|regex:/^#([0-9a-fA-F]{6})$/',

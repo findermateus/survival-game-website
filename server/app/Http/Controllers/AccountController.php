@@ -18,13 +18,14 @@ class AccountController extends Controller
         $password = $post['password'] ?? null;
         $accountRepository = new AccountRepository();
         $logInCase = new LoginCase($accountRepository);
-        $token = $logInCase->execute($email, $password);
+        $account = $logInCase->execute($email, $password);
+        $token = $this->getTokenFromAccount($account);
         return response()->json([
-            'token' => $token->plainTextToken
+            'token' => $token
         ]);
     }
 
-    public function createAccount(ServerRequestInterface $request): void
+    public function createAccount(ServerRequestInterface $request): JsonResponse
     {
         $post = $request->getParsedBody();
         $accountName = $post['accountName'] ?? null;
@@ -33,6 +34,10 @@ class AccountController extends Controller
         $federalId = $post['federalId'] ?? null;
         $accountRepository = new AccountRepository();
         $createAccountCase = new CreateAccountCase($accountRepository);
-        $createAccountCase->execute($accountName, $password, $email, $federalId);
+        $account = $createAccountCase->execute($accountName, $password, $email, $federalId);
+        $token = $this->getTokenFromAccount($account);
+        return response()->json([
+            'token' => $token
+        ]);
     }
 }

@@ -8,6 +8,7 @@ use App\Domain\ValueObjects\FederalId;
 use App\Domain\ValueObjects\Password;
 use App\Exceptions\Account\AccountAlreadyExistsException;
 use App\Exceptions\Account\InvalidEmailException;
+use App\Models\Account;
 
 class CreateAccountCase
 {
@@ -15,13 +16,13 @@ class CreateAccountCase
     {
     }
 
-    public function execute($name, $password, $email, $federalId): void
+    public function execute($name, $password, $email, $federalId): ?Account
     {
         $this->validateEmail($email);
         $cleanFederalId = $this->verifyFederalId($federalId);
         $encryptedPassword = $this->buildPassword($password);
         $this->validateAccountDoesntExists($email, $cleanFederalId);
-        $this->accountRepository->create([
+        return $this->accountRepository->create([
             'name' => $name,
             'password' => $encryptedPassword,
             'email' => $email,
