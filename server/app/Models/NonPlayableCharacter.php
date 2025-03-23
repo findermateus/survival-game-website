@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -28,10 +28,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NonPlayableCharacter whereSkinColorId($value)
  * @mixin \Eloquent
  */
-class NonPlayableCharacter extends Model
+
+class NonPlayableCharacter extends Model implements \JsonSerializable
 {
     protected $table = 'non_playable_characters';
-    
+
     protected $fillable = [
         'name',
         'hair_color',
@@ -41,4 +42,18 @@ class NonPlayableCharacter extends Model
         'is_approved',
         'approved_at',
     ];
+
+    public function jsonSerialize(): mixed
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'hairColor' => $this->hair_color,
+            'accountId' => $this->account_id,
+            'genderId' => $this->gender_id,
+            'skinColor' => $this->skin_color_id,
+            'isApproved' => $this->is_approved,
+            'approvedAt' => $this->approved_at
+        ];
+    }
 }

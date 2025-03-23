@@ -12,4 +12,5 @@ enum ExceptionType
     case AccountNotCreated;
     case AccountNotFound;
     case NPCAlreadyExists;
+    case NPCNotFound;
 }

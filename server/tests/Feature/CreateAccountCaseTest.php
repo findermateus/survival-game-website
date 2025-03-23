@@ -34,6 +34,7 @@ class CreateAccountCaseTest extends TestCase
             ->method('find')
             ->with($request['email'], $cleanFederalId->__toString())
             ->willReturn(null);
+        $this->accountRepositoryMock->method('create')->willReturn(new Account());
         $createAccountCase = new CreateAccountCase($this->accountRepositoryMock);
         $createAccountCase->execute($request['name'], $request['password'], $request['email'], $request['federalId'] );
     }

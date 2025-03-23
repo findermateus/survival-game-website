@@ -22,7 +22,7 @@ class CreateNPCCase
             'skinColor' => $skinColor,
             'hairColor' => $hairColor
         ];
-        $this->npcRepository->create($payload);
+        $this->npcRepository->create($payload, $accountId);
     }
 
     private function validateNPCDoesntExists($accountId)

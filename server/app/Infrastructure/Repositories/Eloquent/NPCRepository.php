@@ -12,15 +12,15 @@ class NPCRepository implements NPCRepositoryInterface
         return NonPlayableCharacter::where('account_id', '=', $accountId)->first();
     }
 
-    public function create(array $payload): void
+    public function create(array $payload, int $accountId): void
     {
         NonPlayableCharacter::insert([
             [
                 'name' => $payload['name'],
                 'skin_color_id' => $payload['skinColor'],
-                'role' => $payload['role'],
-                'age' => $payload['age'],
-                'description' => $payload['description'],
+                'gender_id' => $payload['gender'],
+                'hair_color' => $payload['hairColor'],
+                'account_id' => $accountId
             ],
         ]);
     }

@@ -14,5 +14,6 @@ const authMiddleware = 'auth:sanctum';
 
 Route::middleware(authMiddleware)->group(function () {
     Route::post('/npc', [NPCController::class, 'createNPC']);
+    Route::get('/npc', [NPCController::class, 'getNPC']);
 });
 

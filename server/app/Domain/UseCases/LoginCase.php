@@ -3,12 +3,12 @@
 namespace App\Domain\UseCases;
 
 use App\Domain\Repositories\AccountRepositoryInterface;
+use App\Domain\Services\EmailValidatorService;
 use App\Domain\ValueObjects\Password;
 use App\Exceptions\Account\AccountNotFoundException;
 use App\Exceptions\Account\InvalidEmailException;
 use App\Exceptions\Account\InvalidPasswordException;
 use App\Models\Account;
-use Laravel\Sanctum\NewAccessToken;
 
 class LoginCase
 {
@@ -19,16 +19,16 @@ class LoginCase
         $this->accountRepository = $accountRepository;
     }
 
-    public function execute($email, $password): ?NewAccessToken
+    public function execute($email, $password): ?Account
     {
-        $account = $this->verify($email, $password);
-        return $account->createToken('access-token');
+        return $this->verify($email, $password);
     }
 
     private function verify($email, $password): ?Account
     {
-        if (empty($email)){
-            throw new InvalidEmailException('Email não enviado.');
+        $emailValidatorService = new EmailValidatorService();
+        if (!$emailValidatorService->validate($email)){
+            throw new InvalidEmailException('Email inválido.');
         }
         $account = $this->accountRepository->find($email);
         if (!$account instanceof Account){

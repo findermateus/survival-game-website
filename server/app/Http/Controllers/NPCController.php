@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Domain\UseCases\CreateNPCCase;
+use App\Domain\UseCases\GetNPCCase;
 use App\Http\Requests\CreateNPCRequest;
 use App\Infrastructure\Repositories\Eloquent\NPCRepository;
+use Illuminate\Http\Request;
 
 class NPCController extends Controller
 {
@@ -20,5 +22,16 @@ class NPCController extends Controller
         $npcRepository = new NPCRepository();
         $createNPCCase = new CreateNPCCase($npcRepository);
         $createNPCCase->execute($id, $gender, $name, $skinColor, $hairColor);
+    }
+
+    public function getNPC(Request $request)
+    {
+        $user = $request->user();
+        $npcRepository = new NPCRepository();
+        $getNPCCase = new GetNPCCase($npcRepository);
+        $npc = $getNPCCase->execute($user->id);
+        return response()->json([
+            'npc' => $npc
+        ]);
     }
 }
