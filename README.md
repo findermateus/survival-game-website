@@ -25,6 +25,9 @@ A validação dos NPCs no backend do jogo é gerenciada através da ferramenta d
 
 Esse processo automatizado garante que a validação dos NPCs seja eficiente e escalável.
 
+# Figma inicial
+- [Figma](https://www.figma.com/design/xCowWJuRhebZKh20SUjKGd/Site---trabalho-do-lucas?node-id=0-1&t=QQPsUccZv5nuPiB8-1)
+
 # Documentação Externa 
 - [Ereaser (Fluxograma/Documentação)](https://app.eraser.io/workspace/4tiB9E65AJS6R6aDpp0W)
 - [Jira (Tarefas)](https://criminal-cases.atlassian.net)
