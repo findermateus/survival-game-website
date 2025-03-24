@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateNPCRequest extends FormRequest
+class CreateAccountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,10 @@ class CreateNPCRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'gender' => 'required|integer|exists:genders,id',
-            'name' => 'required|string|max:255',
-            'skinColor' => 'required|integer|exists:skin_colors,id',
-            'hairColor' => 'required|string|regex:/^#([0-9a-fA-F]{6})$/',
+            'accountName' => ['required', 'string'],
+            'password' => ['required', 'string'],
+            'email' => ['required', 'email'],
+            'federalId' => ['required', 'string'],
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Repositories\Eloquent;
 
+use App\Core\NpcStatus;
 use App\Domain\Repositories\NPCRepositoryInterface;
 use App\Models\NonPlayableCharacter;
 use App\Models\NpcRejection;
@@ -11,9 +12,17 @@ use Illuminate\Support\Facades\DB;
 
 class NPCRepository implements NPCRepositoryInterface
 {
-    public function find(?int $accountId = null): ?NonPlayableCharacter
+    public function find(?int $accountId = null): ?array
     {
-        return NonPlayableCharacter::where('account_id', '=', $accountId)->first();
+        $npc = NonPlayableCharacter::where('account_id', '=', $accountId)->first();
+        if (empty($npc)){
+            return null;
+        }
+        $npcRejections = NpcRejection::where('non_playable_character_id', '=', $npc->id);
+        return [
+            'npc' => $npc,
+            'rejections' => $npcRejections->get()
+        ];
     }
 
     public function create(array $payload, int $accountId): void
@@ -40,13 +49,49 @@ class NPCRepository implements NPCRepositoryInterface
         }
     }
 
+    public function updateNpc(NonPlayableCharacter $npc, $name, $gender, $skinColor, $hairColor): bool
+    {
+        $npc->update([
+            'name' => $name,
+            'gender_id' => $gender,
+            'skin_color_id' => $skinColor,
+            'hair_color' => $hairColor
+        ]);
+        return $npc->save();
+    }
+
+    public function addNpcToValidationQueue(NonPlayableCharacter $npc){
+
+        DB::beginTransaction();
+        try{
+            $npc->approval_status = NpcStatus::Pending->name;
+            $npc->approved_at = null;
+            $npc->save();
+            $npcQueueItem = NpcValidationQueue::where('npc_id', '=', $npc->id)->first();
+            if (empty($npcQueueItem)){
+                NpcValidationQueue::insert([
+                    'npc_id' => $npc->id,
+                    'last_checked_at' => Carbon::now()
+                ]);
+                DB::commit();
+                return;
+            }
+            $npcQueueItem->last_checked_at = Carbon::now();
+            $npcQueueItem->save();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
     public function approve($npcId): void
     {
         DB::beginTransaction();
         try{
 
             NonPlayableCharacter::where('id', '=', $npcId)->update([
-                'is_approved' => true,
+                'approval_status' => NpcStatus::Approved->name,
                 'approved_at' => Carbon::now()
             ]);
 
@@ -75,7 +120,7 @@ class NPCRepository implements NPCRepositoryInterface
             ]);
 
             NonPlayableCharacter::where('id', '=', $npcId)->update([
-                'is_approved' => false,
+                'approval_status' => NpcStatus::Rejected->name,
                 'approved_at' => null
             ]);
             DB::commit();

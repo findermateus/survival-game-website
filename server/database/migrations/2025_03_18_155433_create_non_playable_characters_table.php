@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(Account::class);
             $table->foreignIdFor(Gender::class);
             $table->foreignIdFor(SkinColor::class);
-            $table->boolean('is_approved')->default(false);
+            $table->string('approval_status')->default(\App\Core\NpcStatus::Pending->name);
             $table->dateTime('approved_at')->nullable();
         });
     }

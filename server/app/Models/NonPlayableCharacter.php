@@ -16,7 +16,7 @@ class NonPlayableCharacter extends Model implements \JsonSerializable
         'account_id',
         'gender_id',
         'skin_color_id',
-        'is_approved',
+        'approval_status',
         'approved_at',
     ];
 
@@ -29,7 +29,7 @@ class NonPlayableCharacter extends Model implements \JsonSerializable
             'accountId' => $this->account_id,
             'genderId' => $this->gender_id,
             'skinColor' => $this->skin_color_id,
-            'isApproved' => $this->is_approved,
+            'status' => $this->approval_status,
             'approvedAt' => $this->approved_at
         ];
     }

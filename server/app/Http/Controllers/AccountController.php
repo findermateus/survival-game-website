@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Domain\UseCases\CreateAccountCase;
 use App\Domain\UseCases\LoginCase;
+use App\Http\Requests\CreateAccountRequest;
 use App\Infrastructure\Repositories\Eloquent\AccountRepository;
 use Illuminate\Http\JsonResponse;
 use Psr\Http\Message\ServerRequestInterface;
@@ -25,13 +26,12 @@ class AccountController extends Controller
         ]);
     }
 
-    public function createAccount(ServerRequestInterface $request): JsonResponse
+    public function createAccount(CreateAccountRequest $request): JsonResponse
     {
-        $post = $request->getParsedBody();
-        $accountName = $post['accountName'] ?? null;
-        $password = $post['password'] ?? null;
-        $email = $post['email'] ?? null;
-        $federalId = $post['federalId'] ?? null;
+        $accountName = $request->input('accountName');
+        $password = $request->input('password');
+        $email = $request->input('email');
+        $federalId = $request->input('federalId');
         $accountRepository = new AccountRepository();
         $createAccountCase = new CreateAccountCase($accountRepository);
         $account = $createAccountCase->execute($accountName, $password, $email, $federalId);

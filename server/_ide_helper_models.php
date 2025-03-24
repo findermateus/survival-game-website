@@ -13,7 +13,7 @@
 
 namespace App\Models{
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $account_name
@@ -39,7 +39,7 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $gender_name
@@ -55,7 +55,7 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -63,7 +63,7 @@ namespace App\Models{
  * @property int $account_id
  * @property int $gender_id
  * @property int $skin_color_id
- * @property int $is_approved
+ * @property string $approval_status
  * @property string|null $approved_at
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NonPlayableCharacter newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NonPlayableCharacter newQuery()
@@ -83,7 +83,7 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $account_id
@@ -105,7 +105,7 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $npc_id
@@ -126,7 +126,7 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $skin_color_name
