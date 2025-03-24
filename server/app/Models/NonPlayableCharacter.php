@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Core\NpcStatus;
 use Illuminate\Database\Eloquent\Model;
 
 class NonPlayableCharacter extends Model implements \JsonSerializable
@@ -22,6 +23,11 @@ class NonPlayableCharacter extends Model implements \JsonSerializable
 
     public function jsonSerialize(): mixed
     {
+        $npcStatus = NpcStatus::Approved;
+        if (!$this->is_approved){
+            $queueItem = NpcValidationQueue::where('npc_id', '=', $this->id)->first();
+            $npcStatus = empty($queueItem) ? NpcStatus::Rejected : NpcStatus::Pending;
+        }
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -29,7 +35,7 @@ class NonPlayableCharacter extends Model implements \JsonSerializable
             'accountId' => $this->account_id,
             'genderId' => $this->gender_id,
             'skinColor' => $this->skin_color_id,
-            'isApproved' => $this->is_approved,
+            'status' => $npcStatus->name,
             'approvedAt' => $this->approved_at
         ];
     }
