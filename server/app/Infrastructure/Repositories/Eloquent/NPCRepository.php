@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Repositories\Eloquent;
 
+use App\Core\NpcStatus;
 use App\Domain\Repositories\NPCRepositoryInterface;
 use App\Models\NonPlayableCharacter;
 use App\Models\NpcRejection;
@@ -63,7 +64,7 @@ class NPCRepository implements NPCRepositoryInterface
 
         DB::beginTransaction();
         try{
-            $npc->is_approved = false;
+            $npc->approval_status = NpcStatus::Pending->name;
             $npc->approved_at = null;
             $npc->save();
             $npcQueueItem = NpcValidationQueue::where('npc_id', '=', $npc->id)->first();
@@ -90,7 +91,7 @@ class NPCRepository implements NPCRepositoryInterface
         try{
 
             NonPlayableCharacter::where('id', '=', $npcId)->update([
-                'is_approved' => true,
+                'approval_status' => NpcStatus::Approved->name,
                 'approved_at' => Carbon::now()
             ]);
 
@@ -119,7 +120,7 @@ class NPCRepository implements NPCRepositoryInterface
             ]);
 
             NonPlayableCharacter::where('id', '=', $npcId)->update([
-                'is_approved' => false,
+                'approval_status' => NpcStatus::Rejected->name,
                 'approved_at' => null
             ]);
             DB::commit();
