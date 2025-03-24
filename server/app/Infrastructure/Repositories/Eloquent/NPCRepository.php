@@ -69,7 +69,7 @@ class NPCRepository implements NPCRepositoryInterface
             NpcValidationQueue::where('npc_id', '=', $npcId)->delete();
 
             NpcRejection::insert([
-                'npc_id' => $npcId,
+                'non_playable_character_id' => $npcId,
                 'reason' => $reason,
                 'rejected_at' => Carbon::now(),
             ]);
@@ -78,7 +78,7 @@ class NPCRepository implements NPCRepositoryInterface
                 'is_approved' => false,
                 'approved_at' => null
             ]);
-
+            DB::commit();
         } catch (\Exception $e){
             DB::rollBack();
             throw $e;

@@ -45,8 +45,9 @@ class NPCValidatorJob implements ShouldQueue
         Log::info('OpenAI Response:', [
             'response' => $data
         ]);
-
-        $invalidNames = array_column($data['invalid_names'], 'id', 'reason');
+        $content = json_decode($data['choices'][0]['message']['content'], true);
+        $invalidNamesColumn = $content['invalid_names'] ?? [];
+        $invalidNames = array_column($invalidNamesColumn, 'id', 'reason');
         $this->updateNpcList($invalidNames, $npcList);
     }
 

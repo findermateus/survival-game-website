@@ -12,7 +12,6 @@ return new class extends Migration
     {
         Schema::create('npc_rejections', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Account::class);
             $table->foreignIdFor(NonPlayableCharacter::class);
             $table->string('reason');
             $table->dateTime('rejected_at')->nullable();
