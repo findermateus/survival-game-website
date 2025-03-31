@@ -8,6 +8,7 @@ use App\Models\NonPlayableCharacter;
 use App\Models\NpcRejection;
 use App\Models\NpcValidationQueue;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 class NPCRepository implements NPCRepositoryInterface
@@ -128,5 +129,10 @@ class NPCRepository implements NPCRepositoryInterface
             DB::rollBack();
             throw $e;
         }
+    }
+
+    public function fetch(): ?Collection
+    {
+        return NonPlayableCharacter::get();
     }
 }

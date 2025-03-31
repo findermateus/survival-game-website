@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Domain\UseCases\CreateNPCCase;
+use App\Domain\UseCases\GetAllNpcCase;
 use App\Domain\UseCases\GetNPCCase;
 use App\Domain\UseCases\UpdateNpcCase;
 use App\Http\Requests\CreateNPCRequest;
@@ -46,5 +47,12 @@ class NPCController extends Controller
             $request->input('skinColor'),
             $request->input('hairColor')
         );
+    }
+
+    public function getAllNpc()
+    {
+        $npcRepository = new NPCRepository();
+        $getAllNpcCase = new GetAllNpcCase($npcRepository);
+        return response()->json($getAllNpcCase->execute());
     }
 }
