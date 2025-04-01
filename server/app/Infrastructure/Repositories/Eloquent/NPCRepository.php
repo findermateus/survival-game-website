@@ -130,9 +130,4 @@ class NPCRepository implements NPCRepositoryInterface
             throw $e;
         }
     }
-
-    public function fetch(): ?Collection
-    {
-        return NonPlayableCharacter::get();
-    }
 }

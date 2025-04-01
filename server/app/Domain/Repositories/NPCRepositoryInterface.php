@@ -3,7 +3,6 @@
 namespace App\Domain\Repositories;
 
 use App\Models\NonPlayableCharacter;
-use Illuminate\Database\Eloquent\Collection;
 
 interface NPCRepositoryInterface
 {
@@ -19,5 +18,4 @@ interface NPCRepositoryInterface
 
     public function addNpcToValidationQueue(NonPlayableCharacter $npc);
 
-    public function fetch(): ?Collection;
 }

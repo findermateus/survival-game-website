@@ -7,6 +7,9 @@ use App\Domain\UseCases\GetAllNpcCase;
 use App\Domain\UseCases\GetNPCCase;
 use App\Domain\UseCases\UpdateNpcCase;
 use App\Http\Requests\CreateNPCRequest;
+use App\Infrastructure\DAO\Eloquent\GenderDAO;
+use App\Infrastructure\DAO\Eloquent\NpcDAO;
+use App\Infrastructure\DAO\Eloquent\SkinColorDAO;
 use App\Infrastructure\Repositories\Eloquent\NPCRepository;
 use Illuminate\Http\Request;
 
@@ -51,8 +54,10 @@ class NPCController extends Controller
 
     public function getAllNpc()
     {
-        $npcRepository = new NPCRepository();
-        $getAllNpcCase = new GetAllNpcCase($npcRepository);
+        $npcDAO = new NpcDAO();
+        $genderDAO = new GenderDAO();
+        $skinColorDAO = new SkinColorDAO();
+        $getAllNpcCase = new GetAllNpcCase($npcDAO, $skinColorDAO, $genderDAO);
         return response()->json($getAllNpcCase->execute());
     }
 }
