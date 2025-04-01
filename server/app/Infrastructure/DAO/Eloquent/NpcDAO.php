@@ -18,4 +18,10 @@ class NpcDAO implements NpcDAOInterface
             ->limit($limit)
             ->get(['non_playable_characters.*']);
     }
+
+    public function fetch(): ?Collection
+    {
+        return NonPlayableCharacter::whereApprovalStatus(NpcStatus::Approved->name)->get();
+    }
+
 }

@@ -18,3 +18,4 @@ Route::middleware(authMiddleware)->group(function () {
     Route::put('/npc', [NPCController::class, 'updateNpc']);
 });
 
+Route::get('/npcs', [NPCController::class, 'getAllNpc']);

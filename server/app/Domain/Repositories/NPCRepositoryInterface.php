@@ -17,4 +17,5 @@ interface NPCRepositoryInterface
     public function reprove($npcId, $reason): void;
 
     public function addNpcToValidationQueue(NonPlayableCharacter $npc);
+
 }
