@@ -1,7 +1,7 @@
 .default-button {
     margin: 0 15px;
     background: linear-gradient(185.93deg, #1F8E00 -14.42%, #000000 95.44%);
-    outline: 2px solid rgba(62, 255, 180, .0);
+    outline: 2px solid rgba(255, 255, 255, .0);
     cursor: pointer;
     padding: 15px;
     border-radius: 21px;
@@ -10,5 +10,5 @@
 }
 
 .default-button:hover {
-    outline: 2px solid rgba(62, 255, 180, 1);
+    outline: 2px solid rgba(255, 255, 255, 1);
 }
