@@ -1,0 +1,25 @@
+.game-banner-container {
+    align-self: center;
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    border-radius: 12px;
+}
+
+.game-banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.5s ease, filter 0.5s ease, outline 0.5s ease;
+    filter: brightness(90%);
+}
+
+.game-banner-container:hover .game-banner-img {
+    transform: scale(1.05);
+    filter: brightness(100%);
+}
