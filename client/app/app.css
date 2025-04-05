@@ -5,6 +5,10 @@
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+:root {
+  --default-button-color: #1F8E00;
+}
+
 .container {
   width: 80%;
   margin: 0 auto;

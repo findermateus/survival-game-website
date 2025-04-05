@@ -1,11 +1,12 @@
 import React from "react";
-import SteamButton from "~/Components/HeroSection/SteamButton";
-
-
+import GamePresentation from "~/Components/HeroSection/GamePresentation";
+import "./styles.css";
+import GameBanner from "~/Components/HeroSection/GameBanner";
 
 const HeroSection: React.FC = () => {
-    return <section>
-        <SteamButton />
+    return <section className="hero-section">
+        <GamePresentation />
+        <GameBanner />
     </section>
 }
 

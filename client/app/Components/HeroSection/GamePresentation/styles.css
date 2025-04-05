@@ -1,0 +1,19 @@
+.game-presentation {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 70px;
+    font-weight: bold;
+    background-image: linear-gradient(to right, white, grey 60%);
+    color: transparent;
+    background-clip: text;
+}
+
+p {
+    font-size: 1.5em;
+}

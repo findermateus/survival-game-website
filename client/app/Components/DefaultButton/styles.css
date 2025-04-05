@@ -1,14 +1,20 @@
 .default-button {
-    margin: 0 15px;
-    background: linear-gradient(185.93deg, #1F8E00 -14.42%, #000000 95.44%);
-    outline: 2px solid rgba(255, 255, 255, .0);
+    background: linear-gradient(185.93deg, var(--default-button-color) -14.42%, #000000 95.44%);
+    outline: 2px solid transparent;
     cursor: pointer;
-    padding: 15px;
+    padding: 15px 25px;
     border-radius: 21px;
     box-sizing: border-box;
-    transition: all 400ms;
+    transition: all 300ms ease;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
 }
 
+/* Hover simples e elegante */
 .default-button:hover {
-    outline: 2px solid rgba(255, 255, 255, 1);
+    outline: 2px solid rgba(255, 255, 255, 0.4);
+    background: linear-gradient(185.93deg, var(--default-button-color) -10%, #111 100%);
 }
