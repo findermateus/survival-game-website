@@ -1,0 +1,11 @@
+.gallery-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+@media (max-width: 1200px) {
+    .gallery-container {
+        flex-direction: column;
+    }
+}
