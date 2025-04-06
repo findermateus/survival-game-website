@@ -1,0 +1,8 @@
+.game-title {
+    font-weight: bold;
+    background-image: linear-gradient(to bottom, white 5%, black);
+    background-size: 200% auto;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
