@@ -7,7 +7,7 @@ interface DefaultButtonProps {
 
 const DefaultButton: React.FC<DefaultButtonProps> = (props) => {
     const {children} = props;
-    return <button className="default-button" type={"button"}>{children}</button>;
+    return <button className="default-button" type="button">{children}</button>;
 }
 
 export default DefaultButton;

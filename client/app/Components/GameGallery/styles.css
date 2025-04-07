@@ -1,11 +1,20 @@
 .gallery-container {
     display: flex;
     justify-content: space-between;
-    gap: 50px;
+    gap: 25px;
+}
+
+.gallery-container > div {
+    width: 50%;
 }
 
 @media (max-width: 1200px) {
     .gallery-container {
         flex-direction: column;
+        justify-content: center;
+    }
+
+    .gallery-container > div {
+        width: 100%;
     }
 }

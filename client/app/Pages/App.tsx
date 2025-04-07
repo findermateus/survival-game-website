@@ -3,6 +3,7 @@ import HeroSection from "~/Components/HeroSection/HeroSection";
 import NpcInviteSection from "~/Components/NpcInviteSection/NpcInviteSection";
 import ComponentDivisor from "~/Components/Assets/ComponentDivisor/ComponentDivisor";
 import GameGallery from "~/Components/GameGallery/GameGallery";
+import Footer from "~/Components/Footer/Footer";
 
 const App: React.FC = () => {
     return (
@@ -13,6 +14,7 @@ const App: React.FC = () => {
             <NpcInviteSection />
             <ComponentDivisor />
             <GameGallery />
+            <Footer />
         </div>
     )
 }

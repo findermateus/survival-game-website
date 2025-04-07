@@ -8,7 +8,7 @@ interface DefaultTitleProps {
 
 const DefaultTitle: React.FC<DefaultTitleProps> = (props) => {
     const {value, size} = props;
-    return <h1 className="game-title" style={{fontSize: size}}>{value}</h1>
+    return <h1 className="game-title linear-title-bottom" style={{fontSize: size}}>{value}</h1>
 }
 
 export default DefaultTitle;
