@@ -1,0 +1,19 @@
+.gif-container {
+    width: 90%;
+    display: block;
+}
+
+.gif-item {
+    aspect-ratio: 16 / 9;
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: all 200ms;
+    filter: brightness(0.8);
+}
+
+.gif-item:hover {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+}

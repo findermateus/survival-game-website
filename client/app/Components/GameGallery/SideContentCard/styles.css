@@ -1,0 +1,17 @@
+.side-content-card {
+    width: 50%;
+    height: 530px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.url-developer-container{
+    height: 100%;
+}
+
+@media (max-width: 1200px) {
+    .side-content-card {
+        width: 100%;
+    }
+}

@@ -1,0 +1,23 @@
+h2 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.npc-invite-section {
+    display: flex;
+    justify-content: center;
+}
+
+.invite-section-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+@media (max-width: 600px) {
+    .invite-section-container {
+        width: 90%;
+    }
+}
