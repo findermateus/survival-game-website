@@ -1,6 +1,7 @@
 .gif-container {
     width: 90%;
     display: block;
+    border-radius: 15px
 }
 
 .gif-item {
@@ -11,9 +12,11 @@
     background-size: cover;
     transition: all 200ms;
     filter: brightness(0.8);
+    border-radius: 15px
 }
 
 .gif-item:hover {
     transform: scale(1.02);
     filter: brightness(1.1);
+    outline: 2px white solid;
 }
