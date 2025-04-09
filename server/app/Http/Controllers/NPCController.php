@@ -58,6 +58,8 @@ class NPCController extends Controller
         $genderDAO = new GenderDAO();
         $skinColorDAO = new SkinColorDAO();
         $getAllNpcCase = new GetAllNpcCase($npcDAO, $skinColorDAO, $genderDAO);
-        return response()->json($getAllNpcCase->execute());
+        return response()->json($getAllNpcCase->execute(), 200, [
+            'Content-Type' => 'application/json; charset=UTF-8'
+        ]);
     }
 }
