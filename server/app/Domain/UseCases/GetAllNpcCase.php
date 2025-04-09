@@ -34,6 +34,7 @@ class GetAllNpcCase
             $genderId = $npc['gender_id'];
             $response[] = [
                 'npcId' => $npc['id'],
+                'npcName' => $npc['name'],
                 'hairColor' => $npc['hair_color'],
                 'accountId' => $npc['account_id'],
                 'skinColor' => [
