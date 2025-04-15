@@ -33,11 +33,8 @@
   margin: 0 auto;
 }
 
-html,
-body {
-  @apply bg-white dark:bg-black;
-
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
+html, body {
+  background: black;
+  color: white;
 }
+
